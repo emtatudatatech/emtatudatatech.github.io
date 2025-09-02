@@ -52,3 +52,36 @@ ScrollReveal().reveal(".header__btns", {
   ...scrollRevealOption,
   delay: 5000,
 });
+
+
+// About Section Reveal
+ScrollReveal().reveal("#about .section__header", scrollRevealOption);
+ScrollReveal().reveal("#about .about__headline", {
+  ...scrollRevealOption,
+  delay: 500,
+});
+ScrollReveal().reveal(".about__card", {
+  ...scrollRevealOption,
+  delay: 1000,
+  interval: 500,
+});
+
+// Portfolio Section Reveal
+ScrollReveal().reveal("#portfolio .section__header", scrollRevealOption);
+ScrollReveal().reveal(".portfolio__card", {
+  ...scrollRevealOption,
+  delay: 500,
+  interval: 200,
+});
+
+// Contact Section Reveal
+ScrollReveal().reveal("#contact .section__header", scrollRevealOption);
+ScrollReveal().reveal("#contact .contact__description", {
+  ...scrollRevealOption,
+  delay: 500,
+});
+ScrollReveal().reveal(".contact__item", {
+  ...scrollRevealOption,
+  delay: 1000,
+  interval: 500,
+});
