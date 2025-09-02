@@ -1,0 +1,88 @@
+# About
+
+## Headline summary
+
+Analytical and results-driven Analytics Engineer with a strong foundation in 
+data science, engineering, and business intelligence, 
+delivering innovative solutions that drive business growth and operational excellence.
+I also have experience with web development and writing.
+
+## Core Competencies
+
+AI-Powered Solutions
+Business Intelligence & Data Reporting
+Data Science & Engineering
+Machine Learning Model Development
+Financial & Operational Analytics
+Customer Segmentation
+Fraud Detection
+BI Dashboards & Data Visualization
+Data Science Training & Development
+Strategic Planning & Decision-Making
+Process Optimization & Efficiency
+Credit Management & Loan Recovery Systems
+Web Design
+
+## Certifications
+
+Relational Database Developer | freeCodeCamp | April 2025    
+Microsoft Certified: Power BI Data Analyst Associate | Microsoft | December 2022    
+Professional Data Analyst | Datacamp | July 2022
+AI Ethics Certification | Udemy | June 2022 
+Microsoft Certified: Power Platform Fundamentals | Microsoft | December 2021
+
+## Technical Skills and Tools
+
+- Cloud System: AWS, Google Cloud, Microsoft Azure
+- Collaboration Tool: Asana, Jira, Slack, Zoom
+- Database & SQL: MariaDB, Microsoft SQL Server, MySQL, Oracle, Postgres, Redis, SQLite 
+- Data Science & Machine Learning: ETL, Google Colab, Jupyter Notebook, Jupyter Lab, Matplotlib, NLTK, NumPy, Pandas, Power BI, RegEx, Scikit-Learn, SciPy, Seaborn, Snowflake, spaCy, statsmodels
+- Data Visualization: Matplotlib, Seaborn, Power BI, Plotly, Looker Studio, Tableau
+- Design: Canva
+- Documentation: Confluence, Notion
+- Framework: Anaconda, Bootstrap, Django, Flask, PyTorch, TensorFlow, Firebase
+- Operating System: Windows
+- Package Manager: PyPI, Yarn
+- Programming Language: Bash, CSS, HTML, JavaScript, JSON, Markdown, Python, R, YAML, TailwindCSS, Apache Spark (Pyspark), Power BI DAX
+- Productivity & Workflow: Bitbucket, MS Office
+- Version Control: Git
+- Web Scraping & APIs: Requests, Beautiful Soup
+
+# Portfolio
+
+## Expertise
+
+1. Data engineering
+
+### Projects
+- Telco Churn Analytics Engineering | Jun 2019 - May 2020
+- Bima Mkononi | Rules Engineering | Jan 2023 - Mar 2023
+
+2. Data Analysis & Business Intelligence
+
+### Projects
+- The Cardinals of Africa | Feb 2024 - Apr 2024
+- Time Series Analysis of the USD/KES FX Rate | Mar 2023
+- Spotify Music Data Analysis | Jun 2022 – Oct 2022
+- Hotel Booking Demand | Oct 2021 - Nov 2021
+- Customer Product Basket App | Sep 2021 - Jun 2023
+
+3. AI: AI Engineering, Data science, Machine Learning
+
+### Projects
+- AI Human Resource Business Person | Apr 2025
+- Cash Management Optimization | Apr 2023 - Dec 2023
+
+4. Web development
+
+### Projects
+
+5. Writing
+
+### Projects
+Substack | <substack link>
+
+# Contact
+
+email: michaelmainacodes@gmail.com
+phone: +254723118064
