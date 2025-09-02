@@ -531,3 +531,75 @@ footer {
     flex-direction: row;
   }
 }
+
+/* ========================================= */
+/* TECH STACK RIBBON STYLES                  */
+/* ========================================= */
+
+.tech-stack__container {
+  margin-top: 3rem;
+}
+
+.tech-stack__container h3 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color-dark);
+  text-align: center;
+}
+
+.tech-stack__ribbon {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.tech-stack__ribbon::before,
+.tech-stack__ribbon::after {
+  position: absolute;
+  top: 0;
+  width: 10rem;
+  height: 100%;
+  content: "";
+  z-index: 2;
+}
+
+.tech-stack__ribbon::before {
+  left: 0;
+  background: linear-gradient(to left, rgba(212, 187, 106, 0), #d4bb6a);
+}
+
+.tech-stack__ribbon::after {
+  right: 0;
+  background: linear-gradient(to right, rgba(212, 187, 106, 0), #d4bb6a);
+}
+
+.ribbon__content {
+  /* This is the key change to fix vertical stacking */
+  display: flex;
+  align-items: center;
+  animation: scroll 80s linear infinite;
+}
+
+.tech-stack__ribbon:hover .ribbon__content {
+  animation-play-state: paused;
+}
+
+.ribbon__content a {
+  flex-shrink: 0; /* Prevents badges from shrinking */
+}
+
+.ribbon__content img {
+  height: 30px;
+  margin: 0 1rem;
+  vertical-align: middle;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
