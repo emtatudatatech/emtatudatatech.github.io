@@ -533,13 +533,12 @@ footer {
 }
 
 /* ========================================= */
-/* TECH STACK RIBBON STYLES                  */
+/* TECH STACK RIBBON STYLES */
 /* ========================================= */
 
 .tech-stack__container {
   margin-top: 3rem;
-  /* Prevent horizontal scrollbar on the whole page */
-  overflow-x: hidden;
+  overflow-x: hidden; /* Prevent horizontal scrollbar on the page */
 }
 
 .tech-stack__container h3 {
@@ -554,7 +553,8 @@ footer {
   width: 100%;
   overflow: hidden;
   position: relative;
-  margin-bottom: 1rem; /* Space between rows */
+  margin-bottom: 3rem; /* Space between rows */
+  white-space: nowrap; 
 }
 
 /* Fade effect for the edges */
@@ -579,29 +579,35 @@ footer {
 }
 
 .ribbon__content {
-  display: flex;
-  align-items: center;
-  /* Assign the default right-to-left animation */
-  animation: scroll-rtl 60s linear infinite;
+  display: inline-block; 
+  animation: scroll-rtl 120s linear infinite; /* Slower, smoother animation */
 }
 
-/* Target even rows (2, 4, 6...) and apply the reverse animation */
-.tech-stack__ribbon:nth-child(even) .ribbon__content {
-    animation-name: scroll-ltr;
+/* Target the second row and apply the reverse animation */
+.tech-stack__ribbon:nth-of-type(2) .ribbon__content {
+  animation-name: scroll-ltr;
 }
 
 .tech-stack__ribbon:hover .ribbon__content {
   animation-play-state: paused;
 }
 
-.ribbon__content a {
-  flex-shrink: 0;
+/* NEW: Style for the badge card */
+.badge-card {
+  display: inline-flex; /* Changed to inline-flex */
+  align-items: center;
+  justify-content: center;
+  background-color: var(--white);
+  padding: 0.75rem 1rem;
+  margin: 0 0.75rem; /* Space between cards */
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+  vertical-align: middle;
 }
 
-.ribbon__content img {
-  height: 40px; /* Increased badge size */
-  margin: 0 1.5rem; /* Increased spacing */
-  vertical-align: middle;
+.badge-card img {
+  height: 35px; 
+  width: auto;
 }
 
 /* Keyframes for RIGHT-TO-LEFT scroll */
@@ -616,10 +622,10 @@ footer {
 
 /* Keyframes for LEFT-TO-RIGHT scroll */
 @keyframes scroll-ltr {
-    from {
-        transform: translateX(-50%);
-    }
-    to {
-        transform: translateX(0);
-    }
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
