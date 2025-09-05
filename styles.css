@@ -422,6 +422,8 @@ section:nth-of-type(odd) {
 }
 
 .portfolio__card {
+  display: flex;
+  flex-direction: column;
   padding: 1.5rem;
   background-color: var(--white);
   border-radius: 1rem;
@@ -434,79 +436,63 @@ section:nth-of-type(odd) {
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
 }
 
-.portfolio__card h4 {
+.card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.card__icon-type,
+.card__icon-link .material-symbols-outlined {
+  font-size: 1.75rem; /* 28px */
+  color: var(--primary-color);
+  opacity: 0.7;
+}
+
+.card__icon-link {
+  transition: 0.3s;
+}
+.card__icon-link:hover {
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+.card__content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card__category {
   margin-bottom: 0.5rem;
   font-weight: 600;
   color: var(--secondary-color);
 }
 
 .portfolio__card h3 {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   font-size: 1.2rem;
   font-weight: 600;
   color: var(--primary-color-dark);
 }
 
+.card__description {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  flex-grow: 1; /* Allows description to push date to the bottom */
+}
+
 .portfolio__card p {
   color: var(--primary-color);
+  margin-top: auto; /* Pushes the date to the bottom */
 }
 
-.portfolio__card a {
+.portfolio__card p a {
   color: var(--primary-color);
   text-decoration: underline;
-}
-
-/* Contact Section */
-.contact__description {
-  max-width: 600px;
-  margin-inline: auto;
-  margin-bottom: 3rem;
-  text-align: center;
-  color: var(--primary-color);
-}
-
-.contact__details {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-}
-
-.contact__card {
-  padding: 2rem;
-  background-color: var(--primary-color);
-  color: var(--white);
-  border-radius: 1rem;
-  text-align: center;
-  transition: 0.3s;
-}
-
-.contact__card:hover {
-  background-color: var(--primary-color-dark);
-}
-
-.contact__card h3 {
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-
-.contact__card p {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap; /* Allows text to wrap on small screens */
-}
-
-.contact__card i {
-  font-size: 1.5rem;
-}
-
-.contact__card a {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: var(--white);
-  word-break: break-all; /* Prevents long text from overflowing */
 }
 
 /* Footer Section */
@@ -629,4 +615,57 @@ footer {
   to {
     transform: translateX(0);
   }
+}
+
+/* Contact Section */
+.contact__description {
+  max-width: 600px;
+  margin-inline: auto;
+  margin-bottom: 3rem;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.contact__details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.contact__card {
+  padding: 2rem;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border-radius: 1rem;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.contact__card:hover {
+  background-color: var(--primary-color-dark);
+}
+
+.contact__card h3 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.contact__card p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap; /* Allows text to wrap on small screens */
+}
+
+.contact__card i {
+  font-size: 1.5rem;
+}
+
+.contact__card a {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--white);
+  word-break: break-all; /* Prevents long text from overflowing */
 }
