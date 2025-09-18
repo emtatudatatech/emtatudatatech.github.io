@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Dashboard</title>
+    <title>Career Catalogue</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@2.3.0/dist/chartjs-chart-treemap.min.js"></script>
@@ -14,7 +14,7 @@
 <body class="bg-gray-100 text-[#363838] font-sans">
     <div class="container mx-auto p-4 md:p-8">
         <header class="mb-8">
-            <h1 class="text-4xl font-bold text-[#C0A54B]">Project Analysis Dashboard</h1>
+            <h1 class="text-4xl font-bold text-[#C0A54B]">Career Catalogue Dashboard</h1>
         </header>
 
         <section id="summary-cards" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -27,42 +27,42 @@
                 <p id="paid-projects-pct" class="text-4xl font-bold text-[#C0A54B]">0%</p>
             </div>
             <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h2 class="text-lg font-semibold text-gray-400">% of Valuable Projects</h2>
+                <h2 class="text-lg font-semibold text-gray-400">% of Projects with Tangible Value</h2>
                 <p id="valuable-projects-pct" class="text-4xl font-bold text-[#C0A54B]">0%</p>
             </div>
         </section>
 
         <section class="bg-white p-6 rounded-lg shadow-lg mb-8">
-            <h3 class="text-xl font-semibold mb-4 text-[#C0A54B]">Projects by Period</h3>
+            <h2 class="text-xl font-semibold mb-4 text-[#C0A54B]">Projects by Period</h2>
             <canvas id="projects-by-period-chart"></canvas>
         </section>
 
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h3 class="text-xl font-semibold mb-4 text-[#C0A54B]">Projects by Entity</h3>
+                <h2 class="text-xl font-semibold mb-4 text-[#C0A54B]">Projects by Entity</h2>
                 <canvas id="projects-by-entity-chart"></canvas>
             </div>
             <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h3 class="text-xl font-semibold mb-4 text-[#C0A54B]">Projects by Function</h3>
+                <h2 class="text-xl font-semibold mb-4 text-[#C0A54B]">Projects by Function</h2>
                 <canvas id="projects-by-function-chart"></canvas>
             </div>
         </section>
 
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
-                <h3 class="text-xl font-semibold mb-4 text-[#C0A54B]">Projects by Monetization</h3>
+                <h2 class="text-xl font-semibold mb-4 text-[#C0A54B]">Projects by Monetization</h2>
                 <div class="relative w-full max-w-xs">
                     <canvas id="projects-by-monetization-chart"></canvas>
                 </div>
             </div>
             <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h3 class="text-xl font-semibold mb-4 text-[#C0A54B]">Projects by Outputs</h3>
+                <h2 class="text-xl font-semibold mb-4 text-[#C0A54B]">Projects by Outputs</h2>
                 <canvas id="projects-by-outputs-chart"></canvas>
             </div>
         </section>
 
         <section class="bg-white p-6 rounded-lg shadow-lg">
-            <h3 class="text-xl font-semibold mb-4 text-[#C0A54B]">Project Details</h3>
+            <h2 class="text-xl font-semibold mb-4 text-[#C0A54B]">Project Details</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
                 <select id="period-filter" class="bg-white border border-gray-300 rounded-md p-2 text-black">
                     <option value="">Filter by Period...</option>

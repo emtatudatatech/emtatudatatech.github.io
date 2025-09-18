@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
             options: {
                 responsive: true,
                 plugins: {
-                    legend: { display: false },
+                    legend: { display: true },
                     tooltip: { enabled: true }
                 },
                 scales: {
