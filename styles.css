@@ -669,3 +669,66 @@ footer {
   color: var(--white);
   word-break: break-all; /* Prevents long text from overflowing */
 }
+
+/* ========================================= */
+/* PORTFOLIO CARD BACKGROUND STYLES          */
+/* ========================================= */
+
+.portfolio__card {
+  position: relative; /* Needed for the overlay to work */
+  isolation: isolate; /* New stacking context */
+  overflow: hidden; /* Keeps the rounded corners */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* This creates the dark, transparent overlay */
+.portfolio__card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75); /* Adjust opacity here.
+  Black overlay with 75% opacity. 
+  This last number (0.75) is the opacity. 
+  A lower value like 0.6 will make the background image more visible, 
+  while a higher value like 0.85 will make it darker.*/
+  z-index: -1; /* Places the overlay behind the text content */
+  transition: background-color 0.3s;
+}
+
+/* Make the overlay slightly lighter on hover to reveal more of the image */
+.portfolio__card:hover::before {
+    background-color: rgba(0, 0, 0, 0.65);
+}
+
+/* Make all text content inside the card white for readability */
+.portfolio__card .card__content h3,
+.portfolio__card .card__content h4,
+.portfolio__card .card__content p,
+.portfolio__card .card__content p a {
+  color: var(--white);
+}
+
+.portfolio__card .card__icon-type,
+.portfolio__card .card__icon-link .material-symbols-outlined {
+    color: var(--white);
+    opacity: 0.8;
+}
+
+/* Image URLs for each card. */
+#project-1 { background-image: url('assets/project-1-bg.jpg'); }
+#project-2 { background-image: url('assets/project-2-bg.jpg'); }
+#project-3 { background-image: url('assets/project-3-bg.jpg'); }
+#project-4 { background-image: url('assets/project-4-bg.jpg'); }
+#project-5 { background-image: url('assets/project-5-bg.jpg'); }
+#project-6 { background-image: url('assets/project-6-bg.jpg'); }
+#project-7 { background-image: url('assets/project-7-bg.jpg'); }
+#project-8 { background-image: url('assets/project-8-bg.jpg'); }
+#project-9 { background-image: url('assets/project-9-bg.jpg'); }
+#project-10 { background-image: url('assets/project-10-bg.jpg'); }
+#project-11 { background-image: url('assets/project-11-bg.jpg'); }
+#project-12 { background-image: url('assets/project-12-bg.jpg'); }
