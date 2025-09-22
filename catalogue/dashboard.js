@@ -74,18 +74,37 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Render Bar Charts
     const renderBarChart = (data, elementId, key, label) => {
         const chartData = processDataForChart(data, key);
+
+        // --- NEW: Sorting Logic ---
+        // Combine labels and values into an array of objects to sort them together
+        const combinedData = chartData.labels.map((label, index) => {
+            return {
+                label: label,
+                value: chartData.values[index]
+            };
+        });
+
+        // Sort the combined data array in descending order based on the value
+        combinedData.sort((a, b) => b.value - a.value);
+
+        // Separate the sorted labels and values back into their own arrays
+        const sortedLabels = combinedData.map(item => item.label);
+        const sortedValues = combinedData.map(item => item.value);
+        // --- End of Sorting Logic ---
+
         const ctx = document.getElementById(elementId).getContext('2d');
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: chartData.labels,
+                labels: sortedLabels, // Use the new sorted labels
                 datasets: [{
                     label: label,
-                    data: chartData.values,
-                    backgroundColor: generateColors(chartData.labels.length),
+                    data: sortedValues, // Use the new sorted values
+                    backgroundColor: generateColors(sortedLabels.length),
                 }]
             },
             options: {
+                maintainAspectRatio: true,
                 indexAxis: 'y', // For vertical orientation
                 responsive: true,
                 plugins: {
@@ -151,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }]
         },
         options: { 
+            maintainAspectRatio: true,
             responsive: true, 
             plugins: { 
                 legend: { display: false },

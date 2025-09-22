@@ -4,3 +4,50 @@
   --secondary-color: #C0A54B;
   --white: #ffffff;
 }
+
+/* EMTATUDATATECH BANNER */
+.emtatudatatech-banner {
+    background-color: #F3F4F6;
+    color: var(--primary-color); /* Dark text for "emtatudatatech" */
+    font-family: 'Montserrat', sans-serif; /* Assuming a similar font to your portfolio */
+    font-weight: 700; /* Bold */
+    font-size: 2.5rem; /* Adjust as needed */
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align text to the left */
+    position: relative;
+    overflow: hidden; /* Ensures pattern doesn't spill */
+}
+
+.emtatudatatech-banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(var(--secondary-color) 10%, transparent 10%); /* Base color matching secondary-color */
+    background-size: 20px 20px; /* Size of the dots and spacing */
+    opacity: 0.3; /* Adjust for desired visibility */
+    pointer-events: none; /* Allows clicks to pass through */
+}
+
+.emtatudatatech-banner .emtatudatatech-dot {
+    color: var(--secondary-color);
+    margin-left: -0.1em; /* Adjust spacing if needed */
+    z-index: 1; /* Ensure dot is above the pattern */
+}
+
+/* Ensure text is above the pattern */
+.emtatudatatech-banner {
+    z-index: 2;
+}
+
+.dashboard-card {
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.dashboard-card:hover {
+  box-shadow: 0 10px 15px -3px var(--secondary-color), 0 4px 6px -4px var(--secondary-color);
+}
