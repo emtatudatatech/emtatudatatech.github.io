@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Registering the data labels
+    Chart.register(ChartDataLabels);
     // --- UTILITY FUNCTIONS ---
     // Function to generate random colors for charts
     const generateColors = (numColors) => {
@@ -61,7 +63,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 responsive: true,
                 plugins: {
                     legend: { display: true },
-                    tooltip: { enabled: true }
+                    tooltip: { enabled: true },
+                    datalabels: {
+                        display: true,
+                        color: '#363838',
+                        anchor: 'end',
+                        align: 'top',
+                        font: {
+                            weight: 'bold'
+                        },
+                        formatter: (value) => {
+                            // Only display labels for values greater than 0
+                            return value > 0 ? value : '';
+                        }
+                    }
                 },
                 scales: {
                     y: { ticks: { color: '#363838' } },
@@ -108,7 +123,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 indexAxis: 'y', // For vertical orientation
                 responsive: true,
                 plugins: {
-                    legend: { display: false }
+                    legend: { display: false },
+                    datalabels: {
+                        display: false,
+                        color: '#363838',
+                        anchor: 'end',
+                        align: 'top',
+                        font: {
+                            weight: 'bold'
+                        },
+                        formatter: (value) => {
+                            // Only display labels for values greater than 0
+                            return value > 0 ? value : '';
+                        }
+                    }
                 },
                 scales: {
                     y: { ticks: { color: '#363838' } },
@@ -133,7 +161,25 @@ document.addEventListener('DOMContentLoaded', () => {
                     borderWidth: 2
                 }]
             },
-            options: { responsive: true, plugins: { legend: { labels: { color: '#363838' } } } }
+            options: { 
+                responsive: true, 
+                plugins: { 
+                    legend: { labels: { color: '#363838' } },
+                    datalabels: {
+                        display: true,
+                        color: '#dde8e8ff',
+                        anchor: 'center',
+                        align: 'center',
+                        font: {
+                            weight: 'bold'
+                        },
+                        formatter: (value) => {
+                            // Only display labels for values greater than 0
+                            return value > 0 ? value : '';
+                        }
+                    }
+                } 
+            }
         });
     };
 
@@ -182,7 +228,20 @@ document.addEventListener('DOMContentLoaded', () => {
                             return `${item.g}: ${item.v}`;
                         }
                     }
-                }
+                },
+                datalabels: {
+                        display: false,
+                        color: '#363838',
+                        anchor: 'end',
+                        align: 'top',
+                        font: {
+                            weight: 'bold'
+                        },
+                        formatter: (value) => {
+                            // Only display labels for values greater than 0
+                            return value > 0 ? value : '';
+                        }
+                    }
             } 
         }
     });
