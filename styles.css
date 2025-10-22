@@ -509,7 +509,9 @@ footer {
 /* Media Queries */
 @media (width > 768px) {
   .about__grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 900px; /* constrains the 2 cards */
+    margin-inline: auto; /* Centers the 2-card grid */
   }
   .portfolio__grid {
     grid-template-columns: repeat(3, 1fr);
@@ -749,3 +751,79 @@ footer {
 #project-10::after { background-image: url('assets/project-10-bg.jpg'); }
 #project-11::after { background-image: url('assets/project-11-bg.jpg'); }
 #project-12::after { background-image: url('assets/project-12-bg.jpg'); }
+
+/* ========================================= */
+/* CERTIFICATION RIBBON STYLES             */
+/* ========================================= */
+
+.certification__container {
+  margin-top: 3rem;
+}
+
+.certification__container h3 {
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color-dark);
+  text-align: center;
+}
+
+.certification__ribbon {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+  padding-block: 1rem;
+}
+
+/* Fade effect for the edges */
+.certification__ribbon::before,
+.certification__ribbon::after {
+  position: absolute;
+  top: 0;
+  width: 10rem;
+  height: 100%;
+  content: "";
+  z-index: 2;
+}
+
+.certification__ribbon::before {
+  left: 0;
+  background: linear-gradient(to left, rgba(212, 187, 106, 0), #d4bb6a);
+}
+
+.certification__ribbon::after {
+  right: 0;
+  background: linear-gradient(to right, rgba(212, 187, 106, 0), #d4bb6a);
+}
+
+/* Re-using the ribbon content and animation */
+.certification__ribbon .ribbon__content {
+  display: inline-block;
+  animation: scroll-rtl 30s linear infinite; /* Moderate 30-second scroll */
+}
+
+.certification__ribbon:hover .ribbon__content {
+  animation-play-state: paused;
+}
+
+.certificate__card {
+  display: inline-block; /* Aligns cards in a row */
+  margin: 0 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--white);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.certificate__card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.certificate__card img {
+  height: 220px; /* Adjust height as needed */
+  width: auto; /* Maintains aspect ratio */
+  display: block;
+}
