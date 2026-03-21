@@ -1,7 +1,11 @@
 # tik_avodah
 This repository hosts Michael Maina's value creation portfolio.
 
+## portfolio
+My portfolio can be accessed here: [emtatudatatech](https://emtatudatatech.github.io)
+
 ## assets
+
 ### color scheme
 [ArtyClick - Ligh Mustard](https://colors.artyclick.com/color-names-dictionary/color-names/light-mustard-color)
 
