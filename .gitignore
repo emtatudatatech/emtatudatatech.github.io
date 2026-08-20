@@ -2,3 +2,6 @@
 *.xlsx
 *.json
 *.txt
+
+# macOS
+.DS_Store

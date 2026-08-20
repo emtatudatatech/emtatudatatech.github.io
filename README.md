@@ -1,8 +1,48 @@
-# tik_avodah
+# emtatudatatech
 This repository hosts Michael Maina's value creation portfolio.
 
 ## portfolio
 My portfolio can be accessed here: [emtatudatatech](https://emtatudatatech.github.io)
+
+## pages
+| Page | Path | Description |
+| --- | --- | --- |
+| Portfolio | [`index.html`](index.html) | Landing page: about, certifications, tech stack, projects, contact. |
+| CV | [`cv/`](cv/index.html) | Renders [`assets/Resume.pdf`](assets/Resume.pdf) inline, page by page, with download and open-in-new-tab links. |
+| Career Catalogue | [`catalogue/`](catalogue/index.html) | Dashboard view of the project catalogue. |
+
+## updating the CV
+
+**Replace [`assets/Resume.pdf`](assets/Resume.pdf) and commit. That is the whole process.**
+
+`assets/Resume.pdf` is the single source of truth for the CV. The CV page does not transcribe
+any of its contents — it fetches and renders that exact file — so there is no second copy to keep
+in sync and no way for the site to show stale wording. The "last updated" badge on the page comes
+from the file's `Last-Modified` header (falling back to the PDF's own creation date), so it
+refreshes on its own too.
+
+Keep the filename `Resume.pdf`. If you rename it, update `PDF_URL` in
+[`cv/index.html`](cv/index.html) and the two button links in the same file.
+
+The only thing worth mirroring by hand is the About blurb on [`index.html`](index.html) — it is a
+short summary, not a copy of the CV, so it only needs a look when your headline or current role
+changes.
+
+### how the CV page renders
+
+- [pdf.js](https://mozilla.github.io/pdf.js/) 3.11.174 is **vendored** in
+  [`assets/vendor/pdfjs/`](assets/vendor/pdfjs) (Apache-2.0, `LICENSE` included) rather than loaded
+  from a CDN, so the CV never depends on a third-party host being reachable. To upgrade it, replace
+  `pdf.min.js` and `pdf.worker.min.js` with a matching pair from the same release.
+- The PDF is fetched with `cache: "no-cache"`, so a replaced file shows up on the next visit instead
+  of sitting behind the CDN's 10-minute cache window. Unchanged files still return `304`, so this
+  costs nothing.
+- Each page renders to a canvas with a pdf.js text layer over it, which keeps the CV text
+  selectable, searchable and readable by screen readers.
+- If pdf.js fails to load, the page falls back to the browser's native PDF viewer; if that fails
+  too, it falls back to a download link. The CV stays reachable either way.
+
+Everything is static — no build step — so it deploys to GitHub Pages as-is.
 
 ## assets
 

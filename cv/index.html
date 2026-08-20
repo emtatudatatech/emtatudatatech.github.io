@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Curriculum Vitae of Michael Maina Mwangi — Senior Data Scientist based in Nairobi, Kenya."
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Michael Maina | CV</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav__header">
+        <div class="nav__logo">
+          <a href="../index.html">emtatudatatech<span>.</span></a>
+        </div>
+        <div class="nav__menu__btn" id="menu-btn">
+          <i class="ri-menu-3-line"></i>
+        </div>
+      </div>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#portfolio">Portfolio</a></li>
+        <li><a href="index.html">CV</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+      <img src="../assets/bg.png" alt="background" class="nav__bg-1" />
+    </nav>
+
+    <main class="cv__page">
+      <div class="cv__intro">
+        <h1>Curriculum Vitae</h1>
+        <p class="cv__subtitle">Michael Maina Mwangi</p>
+        <p class="cv__updated" id="cv-updated" hidden></p>
+
+        <div class="cv__actions">
+          <a
+            class="btn"
+            href="../assets/Resume.pdf"
+            download="Michael-Maina-Mwangi-CV.pdf"
+          >
+            <i class="ri-download-2-line"></i> Download PDF
+          </a>
+          <a
+            class="btn btn--ghost"
+            href="../assets/Resume.pdf"
+            target="_blank"
+            rel="noopener"
+          >
+            <i class="ri-external-link-line"></i> Open in New Tab
+          </a>
+          <a class="btn btn--ghost" href="../index.html">
+            <i class="ri-arrow-left-line"></i> Back to Portfolio
+          </a>
+        </div>
+      </div>
+
+      <div class="cv__viewer" id="cv-viewer">
+        <p class="cv__status" id="cv-status" role="status">
+          <i class="ri-loader-4-line cv__spinner"></i> Loading CV&hellip;
+        </p>
+      </div>
+
+      <noscript>
+        <div class="cv__fallback">
+          <p>
+            This viewer needs JavaScript to render the CV inline.
+            <a href="../assets/Resume.pdf" download="Michael-Maina-Mwangi-CV.pdf">
+              Download the PDF instead</a
+            >.
+          </p>
+        </div>
+      </noscript>
+    </main>
+
+    <footer>
+      <div class="section__container footer__container">
+        <p>&copy; 2026 Michael Maina. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- pdf.js 3.11.174, vendored under assets/vendor/pdfjs (Apache-2.0).
+         Self-hosted rather than CDN-loaded so the CV never depends on a
+         third-party host being reachable. -->
+    <script
+      src="../assets/vendor/pdfjs/pdf.min.js"
+      onerror="window.__pdfjsFailed = true;"
+    ></script>
+    <script>
+      /* ---------------------------------------------------------------
+         Mobile nav
+      --------------------------------------------------------------- */
+      const menuBtn = document.getElementById("menu-btn");
+      const navLinks = document.getElementById("nav-links");
+      const menuBtnIcon = menuBtn.querySelector("i");
+
+      menuBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("open");
+        const isOpen = navLinks.classList.contains("open");
+        menuBtnIcon.setAttribute(
+          "class",
+          isOpen ? "ri-close-line" : "ri-menu-3-line"
+        );
+      });
+
+      navLinks.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuBtnIcon.setAttribute("class", "ri-menu-3-line");
+      });
+
+      /* ---------------------------------------------------------------
+         CV viewer
+
+         assets/Resume.pdf is the single source of truth for the CV.
+         Nothing here transcribes its contents, so replacing that file is
+         the only step needed to publish a new version.
+      --------------------------------------------------------------- */
+      const PDF_URL = "../assets/Resume.pdf";
+      const PDFJS_WORKER = "../assets/vendor/pdfjs/pdf.worker.min.js";
+      const MAX_PAGE_WIDTH = 900;
+
+      const viewer = document.getElementById("cv-viewer");
+      const status = document.getElementById("cv-status");
+      const updated = document.getElementById("cv-updated");
+
+      /* Falls back to the browser's own PDF handling, then to a plain
+         download link, so the CV is always reachable. */
+      function showFallback(reason) {
+        console.warn("Inline CV render unavailable:", reason);
+        viewer.innerHTML =
+          '<object class="cv__object" data="' +
+          PDF_URL +
+          '" type="application/pdf">' +
+          '<div class="cv__fallback"><p>Your browser could not display the CV inline.</p>' +
+          '<p><a class="btn" href="' +
+          PDF_URL +
+          '" download="Michael-Maina-Mwangi-CV.pdf">' +
+          '<i class="ri-download-2-line"></i> Download the PDF</a></p></div>' +
+          "</object>";
+      }
+
+      function showUpdated(httpDate, pdfDate) {
+        const date = httpDate || pdfDate;
+        if (!date || isNaN(date.getTime())) return;
+        updated.textContent =
+          "Latest version — last updated " +
+          date.toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          });
+        updated.hidden = false;
+      }
+
+      /* PDF date strings look like D:20260818175300+03'00' */
+      function parsePdfDate(raw) {
+        if (!raw) return null;
+        const m = /^D:(\d{4})(\d{2})(\d{2})(\d{2})?(\d{2})?(\d{2})?/.exec(raw);
+        if (!m) return null;
+        return new Date(
+          Number(m[1]),
+          Number(m[2]) - 1,
+          Number(m[3]),
+          Number(m[4] || 0),
+          Number(m[5] || 0),
+          Number(m[6] || 0)
+        );
+      }
+
+      let renderToken = 0;
+
+      async function renderDocument(doc) {
+        const token = ++renderToken;
+        const available = viewer.clientWidth || MAX_PAGE_WIDTH;
+        const targetWidth = Math.min(available, MAX_PAGE_WIDTH);
+        /* Cap the backing store so huge DPR screens don't blow up memory */
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        const pages = document.createDocumentFragment();
+
+        for (let n = 1; n <= doc.numPages; n++) {
+          const page = await doc.getPage(n);
+          if (token !== renderToken) return; /* a resize superseded us */
+
+          const scale = targetWidth / page.getViewport({ scale: 1 }).width;
+          const viewport = page.getViewport({ scale });
+
+          const wrap = document.createElement("div");
+          wrap.className = "cv__pagewrap";
+          wrap.style.width = viewport.width + "px";
+          wrap.style.height = viewport.height + "px";
+          /* pdf.js 3.x positions text-layer spans against this variable */
+          wrap.style.setProperty("--scale-factor", scale);
+
+          const canvas = document.createElement("canvas");
+          canvas.width = Math.floor(viewport.width * dpr);
+          canvas.height = Math.floor(viewport.height * dpr);
+          canvas.style.width = viewport.width + "px";
+          canvas.style.height = viewport.height + "px";
+          canvas.setAttribute("role", "img");
+          canvas.setAttribute(
+            "aria-label",
+            "CV page " + n + " of " + doc.numPages
+          );
+
+          const textLayer = document.createElement("div");
+          textLayer.className = "textLayer";
+
+          wrap.appendChild(canvas);
+          wrap.appendChild(textLayer);
+          pages.appendChild(wrap);
+
+          await page.render({
+            canvasContext: canvas.getContext("2d"),
+            viewport: viewport,
+            transform: dpr !== 1 ? [dpr, 0, 0, dpr, 0, 0] : null,
+          }).promise;
+          if (token !== renderToken) return;
+
+          /* Selectable, searchable, screen-reader-readable text over the canvas */
+          const textContent = await page.getTextContent();
+          await pdfjsLib.renderTextLayer({
+            textContentSource: textContent,
+            container: textLayer,
+            viewport: viewport,
+            textDivs: [],
+          }).promise;
+          if (token !== renderToken) return;
+        }
+
+        if (token !== renderToken) return;
+        viewer.innerHTML = "";
+        viewer.appendChild(pages);
+      }
+
+      async function init() {
+        if (window.__pdfjsFailed || typeof pdfjsLib === "undefined") {
+          showFallback("pdf.js failed to load");
+          return;
+        }
+
+        pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER;
+
+        try {
+          /* 'no-cache' revalidates with the server on every visit, so a
+             replaced Resume.pdf shows up immediately instead of sitting
+             behind the CDN's 10-minute cache window. A 304 still reuses
+             the cached bytes, so this stays cheap. */
+          const response = await fetch(PDF_URL, { cache: "no-cache" });
+          if (!response.ok) throw new Error("HTTP " + response.status);
+
+          const header = response.headers.get("Last-Modified");
+          const data = await response.arrayBuffer();
+
+          const doc = await pdfjsLib.getDocument({ data: data }).promise;
+
+          let pdfDate = null;
+          try {
+            const meta = await doc.getMetadata();
+            pdfDate = parsePdfDate(meta && meta.info && meta.info.CreationDate);
+          } catch (e) {
+            /* metadata is optional; the date line just gets skipped */
+          }
+          showUpdated(header ? new Date(header) : null, pdfDate);
+
+          await renderDocument(doc);
+
+          let resizeTimer;
+          let lastWidth = viewer.clientWidth;
+          window.addEventListener("resize", () => {
+            /* Re-render only on width changes, so the canvases stay crisp
+               without thrashing on mobile URL-bar height changes. */
+            if (viewer.clientWidth === lastWidth) return;
+            lastWidth = viewer.clientWidth;
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+              renderDocument(doc).catch((err) => showFallback(err));
+            }, 250);
+          });
+        } catch (err) {
+          showFallback(err);
+        }
+      }
+
+      if (status) init();
+    </script>
+  </body>
+</html>
