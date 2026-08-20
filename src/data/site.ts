@@ -21,7 +21,7 @@ export const site = {
    * Titles deliberately carry no employer name. Where Michael has worked is
    * answered by the CV and the work-history timeline, not by his job title.
    */
-  role: "Senior Data Scientist, Enterprise Data Office",
+  role: "Senior Data Scientist",
   /** One-line variant for tight spots like the hero badge. */
   roleShort: "Senior Data Scientist · Data, Analytics & AI",
   location: "Nairobi, Kenya",
