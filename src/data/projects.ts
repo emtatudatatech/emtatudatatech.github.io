@@ -30,6 +30,67 @@ export interface Project {
   image?: ImageMetadata;
 }
 
+/**
+ * Shipped web applications — the proof behind the "Websites & Web Applications"
+ * service, which predates its appearance on the CV. Every `live` URL was checked
+ * to return 200; drop the field rather than link a dead demo.
+ */
+export interface Build {
+  name: string;
+  blurb: string;
+  stack: string[];
+  repo: string;
+  live?: string;
+}
+
+export const builds: Build[] = [
+  {
+    name: "Matbeea",
+    blurb:
+      "A serverless FX risk dashboard computing multi-currency correlation matrices and optimising portfolio variance in the browser.",
+    stack: ["Next.js", "TypeScript", "Neon Postgres"],
+    repo: "https://github.com/emtatudatatech/matbeea",
+    live: "https://splendid-jelly-8ac936.netlify.app",
+  },
+  {
+    name: "Who Am I — YouTube",
+    blurb:
+      "An interactive app that reads your personal YouTube watch history and turns a decade of it into something you can actually read.",
+    stack: ["JavaScript", "Data viz"],
+    repo: "https://github.com/emtatudatatech/who-am-i-youtube",
+    live: "https://who-am-i-youtube-emtatu.netlify.app/",
+  },
+  {
+    name: "Auxilium",
+    blurb:
+      "An AI chatbot that turns a company's scattered documents into a knowledge base staff can just ask questions of.",
+    stack: ["Python", "LLM", "RAG"],
+    repo: "https://github.com/emtatudatatech/auxilium",
+  },
+  {
+    name: "Kenya Fashion House",
+    blurb:
+      "A responsive storefront built to hold up on a mid-range phone over mobile data — the pattern most SME sites need.",
+    stack: ["HTML", "CSS", "JavaScript"],
+    repo: "https://github.com/emtatudatatech/kenya-fashion-house",
+  },
+  {
+    name: "Harim",
+    blurb:
+      "A web application that maps and visualises the mountains of Africa, built around a geographic dataset.",
+    stack: ["HTML", "JavaScript", "Data viz"],
+    repo: "https://github.com/emtatudatatech/harim",
+  },
+  {
+    name: "This site",
+    blurb:
+      "Built with Astro, self-hosted fonts and no third-party requests — 7 requests and around 26KB of compressed HTML on first load.",
+    stack: ["Astro", "TypeScript"],
+    repo: "https://github.com/emtatudatatech/emtatudatatech.github.io",
+    live: "https://emtatudatatech.github.io",
+  },
+];
+
 export const projects: Project[] = [
   {
     id: "fraud-detection",

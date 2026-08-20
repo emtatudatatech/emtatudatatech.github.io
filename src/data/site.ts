@@ -16,10 +16,14 @@ export const site = {
   url: "https://emtatudatatech.github.io",
   title: "emtatudatatech — I Turn Company Data Into Money You Can Count",
   description:
-    "Data, analytics and AI consulting for banks, fintechs and operators in East Africa. Fraud models, credit early-warning systems, BI dashboards and GenAI document automation — built by the data scientist behind $4M in prevented fraud.",
-  role: "Senior Data Scientist, Enterprise Data Office — I&M Group PLC",
+    "Data, analytics and AI consulting for banks, fintechs, SMEs and operators in East Africa. Fraud models, credit early-warning systems, BI dashboards, GenAI document automation, and websites and web applications for growing businesses.",
+  /**
+   * Titles deliberately carry no employer name. Where Michael has worked is
+   * answered by the CV and the work-history timeline, not by his job title.
+   */
+  role: "Senior Data Scientist, Enterprise Data Office",
   /** One-line variant for tight spots like the hero badge. */
-  roleShort: "Senior Data Scientist · I&M Group PLC",
+  roleShort: "Senior Data Scientist · Data, Analytics & AI",
   location: "Nairobi, Kenya",
   email: "michaelmainacodes@gmail.com",
   phoneDisplay: "+254 723 118 064",

@@ -60,6 +60,26 @@ export const packages: Package[] = [
       "Hi Michael — I'm interested in the Decision Cockpit. Here's our situation:",
   },
   {
+    id: "business-online",
+    name: "The Business Online Build",
+    tagline: "For SMEs: the website or tool your business should already have.",
+    forWho:
+      "Small and medium businesses running on spreadsheets and WhatsApp, who need customers to find them — or need one internal process to stop eating the day.",
+    timeline: "3–5 weeks",
+    includes: [
+      "A fast, mobile-first website built for how Kenyans actually browse",
+      "Or a custom web application: bookings, inventory, portals, admin tools",
+      "Copy and structure aimed at enquiries, not at looking busy",
+      "Analytics wired up so you can see what brings customers in",
+      "Domain, hosting and search setup handled end to end",
+      "Training so you can update it yourself, and the code handed over",
+    ],
+    walkAway:
+      "A site or tool that works on a cheap phone over mobile data, that you own outright and can change without calling anyone.",
+    ctaMessage:
+      "Hi Michael — I'm interested in the Business Online Build. Here's our situation:",
+  },
+  {
     id: "revenue-engine",
     name: "The Revenue Engine",
     tagline: "One model, in production, aimed at one line of your P&L.",

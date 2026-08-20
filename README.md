@@ -37,15 +37,27 @@ Copy lives in typed data files, not in markup. Edit these and the pages follow:
 | File | Controls |
 | --- | --- |
 | [`src/data/site.ts`](src/data/site.ts) | Name, role, phone, email, socials, and the WhatsApp CTA every button uses |
-| [`src/data/services.ts`](src/data/services.ts) | The five capability areas |
-| [`src/data/packages.ts`](src/data/packages.ts) | The three productized offers and the retainers |
+| [`src/data/services.ts`](src/data/services.ts) | The six capability areas |
+| [`src/data/packages.ts`](src/data/packages.ts) | The four productized offers and the retainers |
 | [`src/data/proof.ts`](src/data/proof.ts) | Headline stats, result stats, certifications, client list |
-| [`src/data/projects.ts`](src/data/projects.ts) | Case studies |
+| [`src/data/projects.ts`](src/data/projects.ts) | Client case studies, plus `builds` — the shipped web applications |
 | [`src/data/faq.ts`](src/data/faq.ts) | Objection handling |
 
 **Rule for `proof.ts`:** every number on the site is traceable to a delivered
 engagement in the CV. If a figure cannot survive a follow-up question in a sales
 meeting, it does not belong there.
+
+**Rule for job titles:** titles never carry an employer name. "Senior Data
+Scientist, Enterprise Data Office" — not "… at Company X". Where Michael has
+worked is answered by the CV and by the work-history timeline in
+[`src/components/About.astro`](src/components/About.astro), which is the one
+place employers are listed as such. Client names still appear on case studies
+and in the "work delivered for" strip, because there they are proof rather than
+a job title.
+
+**Rule for `builds`:** these back the Websites & Web Applications service, which
+predates its appearance on the CV. Every `live` URL is checked before it ships —
+drop the field rather than link a demo that has gone down.
 
 ### changing the phone number
 

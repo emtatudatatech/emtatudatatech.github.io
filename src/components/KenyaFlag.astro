@@ -1,0 +1,66 @@
+---
+/**
+ * The flag of Kenya, simplified for small sizes: black / white / red / white /
+ * green bands with the Maasai shield and crossed spears centred over them.
+ * Kept out of Icon.astro because that set is single-colour `currentColor` art.
+ */
+interface Props {
+  size?: number;
+  class?: string;
+}
+
+const { size = 16, class: className } = Astro.props;
+const height = Math.round((size * 2) / 3);
+
+/** Unique per render, so two flags on one page cannot clash over the clip id. */
+const clipId = `ke-shield-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 36 24"
+  width={size}
+  height={height}
+  role="img"
+  aria-label="Flag of Kenya"
+  class={className}
+>
+  <defs>
+    <clipPath id={clipId}>
+      <ellipse cx="18" cy="12" rx="3.5" ry="7" />
+    </clipPath>
+  </defs>
+
+  <!-- Bands, with white fimbriations showing through between them -->
+  <rect width="36" height="24" fill="#fff" rx="1.5" />
+  <rect width="36" height="7.4" fill="#000" rx="1.5" />
+  <rect y="4" width="36" height="3.4" fill="#000" />
+  <rect y="8.6" width="36" height="6.8" fill="#be0027" />
+  <rect y="16.6" width="36" height="7.4" fill="#006b3f" rx="1.5" />
+  <rect y="16.6" width="36" height="3.4" fill="#006b3f" />
+
+  <!-- Crossed spears, behind the shield -->
+  <g stroke="#fff" stroke-width="1.1" stroke-linecap="round">
+    <path d="M14.4 4 21.6 20" />
+    <path d="M21.6 4 14.4 20" />
+  </g>
+
+  <!-- Maasai shield: red centre with black above and below, white dividers -->
+  <g clip-path={`url(#${clipId})`}>
+    <rect x="14" y="5" width="8" height="14" fill="#be0027" />
+    <rect x="14" y="4" width="8" height="4.6" fill="#000" />
+    <rect x="14" y="15.4" width="8" height="4.6" fill="#000" />
+    <rect x="14" y="8.6" width="8" height="0.7" fill="#fff" />
+    <rect x="14" y="14.7" width="8" height="0.7" fill="#fff" />
+  </g>
+  <ellipse cx="18" cy="12" rx="1.15" ry="2.5" fill="#fff" />
+  <ellipse
+    cx="18"
+    cy="12"
+    rx="3.5"
+    ry="7"
+    fill="none"
+    stroke="#fff"
+    stroke-width="0.9"
+  />
+</svg>

@@ -8,7 +8,7 @@ import { whatsapp } from "../data/site";
   <div class="wrap">
     <div class="section__head section__head--center">
       <p class="eyebrow">What you get</p>
-      <h2>Three ways to start. Fixed scope, fixed timeline, no open-ended bill.</h2>
+      <h2>Four ways to start. Fixed scope, fixed timeline, no open-ended bill.</h2>
       <p class="lede">
         Pricing depends on your data volume and how many systems are involved,
         so I quote it after the first call — never before I know what I am
@@ -86,9 +86,17 @@ import { whatsapp } from "../data/site";
 <style>
   .packages {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    grid-template-columns: minmax(0, 1fr);
     gap: 1.15rem;
     align-items: start;
+  }
+
+  /* Two columns rather than auto-fit: with four cards, auto-fit lands on three
+     across and leaves a single orphan on the second row. */
+  @media (min-width: 760px) {
+    .packages {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   .packages__card {
@@ -180,6 +188,10 @@ import { whatsapp } from "../data/site";
   .packages__list {
     display: grid;
     gap: 0.6rem;
+    /* The walk-away box below uses `margin-top: auto` to bottom-align the CTAs
+       across cards. In the tallest card that auto resolves to zero, so the gap
+       has to come from this side or the box lands on the last list item. */
+    margin-bottom: 1.35rem;
   }
 
   .packages__list li {
@@ -197,7 +209,7 @@ import { whatsapp } from "../data/site";
   }
 
   .packages__walk {
-    margin: 1.35rem 0;
+    margin-bottom: 1.35rem;
     padding: 0.95rem 1.1rem;
     border-radius: 12px;
     background: var(--surface-2);

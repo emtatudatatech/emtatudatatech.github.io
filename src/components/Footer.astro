@@ -1,5 +1,6 @@
 ---
 import Icon from "./Icon.astro";
+import KenyaFlag from "./KenyaFlag.astro";
 import { site, primaryCta } from "../data/site";
 import { services } from "../data/services";
 
@@ -82,7 +83,10 @@ const socials = [
 
   <div class="wrap footer__bar">
     <p>&copy; {year} {site.legalName}. All rights reserved.</p>
-    <p>Built with Astro. Hosted on GitHub Pages.</p>
+    <p class="footer__made">
+      Proudly built in Kenya.
+      <KenyaFlag size={17} />
+    </p>
   </div>
 </footer>
 
@@ -171,6 +175,17 @@ const socials = [
   .footer__loc {
     color: var(--text-3);
     margin-top: 1rem;
+  }
+
+  .footer__made {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .footer__made :global(svg) {
+    flex: none;
+    border-radius: 2px;
   }
 
   .footer__bar {

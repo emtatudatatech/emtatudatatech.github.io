@@ -87,6 +87,24 @@ export const services: Service[] = [
     stack: ["SQL", "Python", "Snowflake", "Postgres", "Oracle", "Azure", "GCP", "AWS"],
   },
   {
+    id: "web-apps",
+    icon: "browser",
+    name: "Websites & Web Applications",
+    pain: "Your business runs on WhatsApp threads and a spreadsheet, and customers cannot find you online — or they find a site that loads slowly and says nothing.",
+    outcome:
+      "A fast, mobile-first site that brings in enquiries, or an internal tool that replaces the spreadsheet everyone is scared to touch.",
+    deliverables: [
+      "Marketing sites built to load in under a second on Kenyan mobile data",
+      "Custom web applications — bookings, inventory, portals, admin tools",
+      "Dashboards and reporting built into your own product",
+      "AI assistants and chatbots trained on your documents",
+      "Search, analytics and hosting set up so you can see what is working",
+    ],
+    proof:
+      "Built and shipped full-stack applications on Next.js, Django and Flask — including a live serverless FX risk dashboard on Next.js and Neon Postgres. This site is one of them.",
+    stack: ["Next.js", "Astro", "TypeScript", "Django", "Flask", "Postgres", "Tailwind"],
+  },
+  {
     id: "enablement",
     icon: "users",
     name: "Team Enablement & Training",
