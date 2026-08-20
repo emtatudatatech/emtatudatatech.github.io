@@ -1,0 +1,108 @@
+---
+import Icon from "./Icon.astro";
+
+/** Symptoms, in the buyer's language. Recognition is what earns the next scroll. */
+const symptoms = [
+  {
+    title: "Reports arrive too late to act on",
+    body: "By the time the monthly pack lands, the month is over. You are steering by looking in the mirror.",
+  },
+  {
+    title: "Three departments, three different numbers",
+    body: "Every meeting starts by arguing about whose figure is right instead of deciding what to do.",
+  },
+  {
+    title: "Losses you only find out about afterwards",
+    body: "Fraud, defaults and churn get discovered in the reconciliation, not in time to stop them.",
+  },
+  {
+    title: "Expensive people doing typing",
+    body: "Analysts and officers spend their days copying data between PDFs, spreadsheets and systems.",
+  },
+  {
+    title: "A dashboard nobody opens",
+    body: "Someone built it, it answers the wrong question, and the team went back to Excel.",
+  },
+  {
+    title: "An AI pilot that never shipped",
+    body: "It demoed well. Then it hit real data, real volumes and real compliance, and quietly stopped.",
+  },
+];
+---
+
+<section class="section section--alt" id="problem">
+  <div class="wrap">
+    <div class="section__head section__head--center">
+      <p class="eyebrow">The real cost</p>
+      <h2>Your data is already telling you where the money is. Nobody is listening.</h2>
+      <p class="lede">
+        Every organisation I walk into is sitting on years of transactions,
+        tickets, applications and logs. The problem is almost never a lack of
+        data. It is that nothing turns it into a decision fast enough to matter.
+      </p>
+    </div>
+
+    <ul class="problem__grid">
+      {
+        symptoms.map((item, index) => (
+          <li class="card problem__card reveal" data-reveal-delay={index * 60}>
+            <span class="problem__mark" aria-hidden="true">
+              <Icon name="close" size={14} />
+            </span>
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="problem__turn">
+      If you recognised three or more of these, the gap is not talent or tooling.
+      It is that nobody owns the path from raw data to a decision someone acts
+      on. <strong>That is the job I do.</strong>
+    </p>
+  </div>
+</section>
+
+<style>
+  .problem__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+    gap: 1rem;
+  }
+
+  .problem__card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .problem__card p {
+    color: var(--text-2);
+    font-size: 0.93rem;
+  }
+
+  .problem__mark {
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    margin-bottom: 0.9rem;
+    color: #c0483c;
+    background: rgba(192, 72, 60, 0.12);
+  }
+
+  :global(html[data-theme="dark"]) .problem__mark {
+    color: #f08b7f;
+    background: rgba(240, 139, 127, 0.14);
+  }
+
+  .problem__turn {
+    max-width: 62ch;
+    margin: clamp(2.25rem, 4vw, 3rem) auto 0;
+    text-align: center;
+    font-size: clamp(1.05rem, 1.9vw, 1.25rem);
+    color: var(--text-2);
+    line-height: 1.55;
+  }
+</style>

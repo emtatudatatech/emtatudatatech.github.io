@@ -1,0 +1,133 @@
+---
+import { faqs } from "../data/faq";
+
+/** FAQPage schema so these answers can surface directly in search results. */
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.q,
+    acceptedAnswer: { "@type": "Answer", text: faq.a },
+  })),
+};
+---
+
+<section class="section section--alt" id="faq">
+  <div class="wrap faq__wrap">
+    <div class="section__head section__head--center">
+      <p class="eyebrow">Before you ask</p>
+      <h2>The questions that stop people sending the message.</h2>
+    </div>
+
+    <div class="faq">
+      {
+        faqs.map((faq) => (
+          <details class="faq__item" name="faq">
+            <summary>
+              <span>{faq.q}</span>
+              <span class="faq__chevron" aria-hidden="true" />
+            </summary>
+            <div class="faq__answer">
+              <p>{faq.a}</p>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</section>
+
+<style>
+  .faq__wrap {
+    max-width: 860px;
+  }
+
+  .faq {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .faq__item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: border-color 0.18s ease;
+  }
+
+  .faq__item[open] {
+    border-color: var(--border-strong);
+  }
+
+  .faq__item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.01rem;
+    line-height: 1.35;
+    list-style: none;
+  }
+
+  /* Hide the native disclosure triangle in both engines. */
+  .faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__item summary::marker {
+    content: "";
+  }
+
+  .faq__item summary:hover {
+    color: var(--accent-ink);
+  }
+
+  .faq__chevron {
+    position: relative;
+    width: 14px;
+    height: 14px;
+    flex: none;
+    transition: transform 0.22s ease;
+  }
+
+  /* A plus sign drawn from two bars; the vertical one collapses when open. */
+  .faq__chevron::before,
+  .faq__chevron::after {
+    content: "";
+    position: absolute;
+    background: var(--accent-ink);
+    border-radius: 2px;
+  }
+
+  .faq__chevron::before {
+    inset: 6px 0;
+    height: 2px;
+  }
+
+  .faq__chevron::after {
+    inset: 0 6px;
+    width: 2px;
+    transition: transform 0.22s ease, opacity 0.22s ease;
+  }
+
+  .faq__item[open] .faq__chevron::after {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+
+  .faq__answer {
+    padding: 0 1.25rem 1.25rem;
+  }
+
+  .faq__answer p {
+    color: var(--text-2);
+    font-size: 0.95rem;
+    max-width: 72ch;
+  }
+</style>

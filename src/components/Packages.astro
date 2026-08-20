@@ -1,0 +1,247 @@
+---
+import Icon from "./Icon.astro";
+import { packages, retainers } from "../data/packages";
+import { whatsapp } from "../data/site";
+---
+
+<section class="section section--alt" id="packages">
+  <div class="wrap">
+    <div class="section__head section__head--center">
+      <p class="eyebrow">What you get</p>
+      <h2>Three ways to start. Fixed scope, fixed timeline, no open-ended bill.</h2>
+      <p class="lede">
+        Pricing depends on your data volume and how many systems are involved,
+        so I quote it after the first call — never before I know what I am
+        walking into. What is fixed is the scope and the date it lands.
+      </p>
+    </div>
+
+    <div class="packages">
+      {
+        packages.map((pkg, index) => (
+          <article
+            class:list={["packages__card", "reveal", { "is-featured": pkg.featured }]}
+            data-reveal-delay={index * 80}
+          >
+            {pkg.featured && <span class="packages__flag">Most requested</span>}
+
+            <header class="packages__head">
+              <h3>{pkg.name}</h3>
+              <p class="packages__tagline">{pkg.tagline}</p>
+            </header>
+
+            <dl class="packages__meta">
+              <div>
+                <dt>Timeline</dt>
+                <dd>{pkg.timeline}</dd>
+              </div>
+              <div>
+                <dt>Built for</dt>
+                <dd>{pkg.forWho}</dd>
+              </div>
+            </dl>
+
+            <p class="packages__includes-label">What is included</p>
+            <ul class="packages__list">
+              {pkg.includes.map((item) => (
+                <li>
+                  <Icon name="check" size={15} />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <p class="packages__walk">{pkg.walkAway}</p>
+
+            <a
+              class:list={["btn", "btn--block", pkg.featured ? "btn--primary" : "btn--ghost"]}
+              href={whatsapp(pkg.ctaMessage)}
+              target="_blank"
+              rel="noopener"
+            >
+              <Icon name="whatsapp" size={17} />
+              Ask about {pkg.name.replace(/^The /, "")}
+            </a>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="retainers">
+      <h3>Working together beyond a single project</h3>
+      <div class="retainers__grid">
+        {
+          retainers.map((item) => (
+            <div class="card retainers__card">
+              <h4>{item.name}</h4>
+              <p>{item.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .packages {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 1.15rem;
+    align-items: start;
+  }
+
+  .packages__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.5rem, 2.8vw, 2rem);
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .packages__card:hover {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-md);
+  }
+
+  .packages__card.is-featured {
+    border-color: var(--accent);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .packages__flag {
+    position: absolute;
+    top: -11px;
+    left: clamp(1.5rem, 2.8vw, 2rem);
+    padding: 0.28rem 0.75rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--on-accent);
+    font-size: 0.7rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .packages__head h3 {
+    font-size: 1.35rem;
+  }
+
+  .packages__tagline {
+    margin-top: 0.5rem;
+    color: var(--accent-ink);
+    font-weight: 500;
+    font-size: 0.96rem;
+  }
+
+  .packages__meta {
+    display: grid;
+    gap: 0.85rem;
+    margin: 1.35rem 0;
+    padding: 1rem 0;
+    border-block: 1px solid var(--border);
+  }
+
+  .packages__meta dt {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 0.2rem;
+  }
+
+  .packages__meta dd {
+    font-size: 0.91rem;
+    color: var(--text-2);
+  }
+
+  .packages__meta div:first-child dd {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .packages__includes-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 0.8rem;
+  }
+
+  .packages__list {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .packages__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.91rem;
+    color: var(--text-2);
+  }
+
+  .packages__list :global(svg) {
+    flex: none;
+    margin-top: 0.28em;
+    color: var(--accent-ink);
+  }
+
+  .packages__walk {
+    margin: 1.35rem 0;
+    padding: 0.95rem 1.1rem;
+    border-radius: 12px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: var(--text);
+    font-weight: 500;
+    /* Pushes the CTA to the card bottom so all three buttons align. */
+    margin-top: auto;
+  }
+
+  /* The longest label ("Ask about Data Health Check") needs the side padding
+     trimmed to stay on one line, otherwise that one card's button grows taller
+     than the other two and the row stops aligning. */
+  .packages__card .btn--block {
+    padding-inline: 1rem;
+    font-size: 0.92rem;
+  }
+
+  /* --- Retainers --- */
+
+  .retainers {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  }
+
+  .retainers h3 {
+    font-size: 1.15rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .retainers__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 1rem;
+  }
+
+  .retainers__card h4 {
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .retainers__card p {
+    color: var(--text-2);
+    font-size: 0.92rem;
+  }
+</style>

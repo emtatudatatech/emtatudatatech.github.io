@@ -1,0 +1,116 @@
+---
+import Icon from "./Icon.astro";
+
+/**
+ * Risk reversal. These are commitments Michael has to be willing to honour —
+ * treat the wording here as a contract summary, not marketing copy.
+ */
+const promises = [
+  {
+    icon: "shield" as const,
+    title: "The Health Check pays for itself or it is free",
+    body: "If the two-week Data Health Check does not surface opportunities worth more than several times what you paid for it — quantified, with your numbers, in writing — you do not pay for it. You keep the report either way.",
+  },
+  {
+    icon: "clock" as const,
+    title: "Fixed deadline, fixed scope",
+    body: "The date and the deliverables are agreed before work starts. If the scope grows, we agree that separately in writing. You will not receive a surprise invoice for hours you did not approve.",
+  },
+  {
+    icon: "layers" as const,
+    title: "You own everything, from day one",
+    body: "Code, models, dashboards, pipelines and documentation are handed over and are yours. No proprietary layer you have to keep renting, and nothing that only works while I am around.",
+  },
+];
+---
+
+<section class="section section--alt" id="guarantee">
+  <div class="wrap">
+    <div class="guarantee">
+      <div class="guarantee__intro">
+        <p class="eyebrow">Where the risk sits</p>
+        <h2>You have been burned by a data project before. Most people have.</h2>
+        <p class="lede">
+          A consultancy took six months, produced a deck, and left nothing that
+          runs. So the risk of trying again sits entirely with you. Here is how
+          I move it back onto me.
+        </p>
+      </div>
+
+      <ul class="guarantee__list">
+        {
+          promises.map((promise, index) => (
+            <li class="guarantee__item reveal" data-reveal-delay={index * 80}>
+              <span class="guarantee__icon" aria-hidden="true">
+                <Icon name={promise.icon} size={20} />
+              </span>
+              <div>
+                <h3>{promise.title}</h3>
+                <p>{promise.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .guarantee {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  .guarantee__intro {
+    position: sticky;
+    top: calc(var(--nav-h) + 2rem);
+  }
+
+  .guarantee__list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .guarantee__item {
+    display: flex;
+    gap: 1rem;
+    padding: clamp(1.3rem, 2.4vw, 1.7rem);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+
+  .guarantee__icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    flex: none;
+    border-radius: 12px;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+  }
+
+  .guarantee__item h3 {
+    font-size: 1.08rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .guarantee__item p {
+    color: var(--text-2);
+    font-size: 0.93rem;
+  }
+
+  @media (max-width: 900px) {
+    .guarantee {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .guarantee__intro {
+      position: static;
+    }
+  }
+</style>

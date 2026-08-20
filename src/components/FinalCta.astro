@@ -1,0 +1,117 @@
+---
+import Icon from "./Icon.astro";
+import { site, primaryCta } from "../data/site";
+---
+
+<section class="section cta" id="contact">
+  <div class="wrap">
+    <div class="cta__panel">
+      <p class="eyebrow">Next step</p>
+      <h2>Send me the problem. I will tell you if it is worth solving.</h2>
+      <p class="cta__lede">
+        One message describing what is going wrong and roughly what it costs
+        you. If there is something here, we book thirty minutes. If there is
+        not — or if someone else is a better fit — I will tell you that instead,
+        and it will have cost you a WhatsApp message.
+      </p>
+
+      <div class="cta__actions">
+        <a
+          class="btn btn--primary btn--lg"
+          href={primaryCta.href}
+          target="_blank"
+          rel="noopener"
+        >
+          <Icon name="whatsapp" size={19} />
+          Message me on WhatsApp
+        </a>
+        <a class="btn btn--ghost btn--lg" href={`mailto:${site.email}?subject=${encodeURIComponent("Data project enquiry")}`}>
+          <Icon name="mail" size={17} />
+          Email instead
+        </a>
+      </div>
+
+      <ul class="cta__contacts">
+        <li>
+          <Icon name="phone" size={16} />
+          <a href={site.phoneHref}>{site.phoneDisplay}</a>
+        </li>
+        <li>
+          <Icon name="mail" size={16} />
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </li>
+        <li>
+          <Icon name="clock" size={16} />
+          <span>Replies within one working day · {site.location}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta__panel {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.35rem, 4vw, 3rem);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .cta__panel::before {
+    content: "";
+    position: absolute;
+    inset: -60% -20% auto;
+    height: 130%;
+    background: radial-gradient(ellipse at top, var(--accent-soft), transparent 62%);
+    pointer-events: none;
+  }
+
+  .cta__panel > * {
+    position: relative;
+  }
+
+  .cta__panel .eyebrow::before {
+    display: none;
+  }
+
+  .cta__lede {
+    max-width: 58ch;
+    margin: 1.25rem auto 0;
+    color: var(--text-2);
+    font-size: clamp(1rem, 1.7vw, 1.13rem);
+  }
+
+  .cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-top: 2rem;
+  }
+
+  .cta__contacts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.7rem 2rem;
+    margin-top: 2.25rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.89rem;
+    color: var(--text-3);
+  }
+
+  .cta__contacts li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .cta__contacts a:hover {
+    color: var(--accent-ink);
+  }
+</style>
