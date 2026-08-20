@@ -1,0 +1,420 @@
+/* ==========================================================================
+   emtatudatatech — design system
+   Tokens are defined once on :root (light) and overridden for dark. Every
+   colour used anywhere in the site resolves through a token, so the theme
+   toggle never needs to know what a component looks like.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-latin.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/fonts/grotesk-latin.woff2") format("woff2");
+  font-weight: 500 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* --- Tokens: light (default) --------------------------------------------- */
+
+:root {
+  --bg: #faf9f6;
+  --bg-alt: #f1eee7;
+  --surface: #ffffff;
+  --surface-2: #f6f4ef;
+  --border: #e4dfd4;
+  --border-strong: #cfc7b6;
+
+  --text: #16150f;
+  --text-2: #4a4740;
+  --text-3: #6f6b61;
+
+  --accent: #c6a94d;
+  --accent-ink: #7a5d12; /* gold as *text* — darkened for contrast on light */
+  --accent-soft: rgba(198, 169, 77, 0.12);
+  --on-accent: #16150f;
+
+  --positive: #1c6b48;
+  --shadow-sm: 0 1px 2px rgba(22, 21, 15, 0.06);
+  --shadow-md: 0 4px 16px rgba(22, 21, 15, 0.08);
+  --shadow-lg: 0 18px 48px rgba(22, 21, 15, 0.12);
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  --font-display: "Space Grotesk", "Inter", ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+
+  --wrap: 1180px;
+  --wrap-narrow: 760px;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --nav-h: 64px;
+}
+
+/* --- Tokens: dark -------------------------------------------------------- */
+
+:root[data-theme="dark"] {
+  --bg: #0c0d0e;
+  --bg-alt: #121416;
+  --surface: #15181a;
+  --surface-2: #1c2023;
+  --border: #292e33;
+  --border-strong: #3a4046;
+
+  --text: #f4f3ee;
+  --text-2: #b4b2aa;
+  --text-3: #8a8880;
+
+  --accent: #d2b45b;
+  --accent-ink: #e3c871;
+  --accent-soft: rgba(210, 180, 91, 0.14);
+  --on-accent: #14140e;
+
+  --positive: #4fbb8b;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 18px 48px rgba(0, 0, 0, 0.55);
+}
+
+/* Visitors who never touch the toggle follow their OS. The inline script in
+   Base.astro stamps data-theme before paint, so this only matters if JS fails. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0c0d0e;
+    --bg-alt: #121416;
+    --surface: #15181a;
+    --surface-2: #1c2023;
+    --border: #292e33;
+    --border-strong: #3a4046;
+    --text: #f4f3ee;
+    --text-2: #b4b2aa;
+    --text-3: #8a8880;
+    --accent: #d2b45b;
+    --accent-ink: #e3c871;
+    --accent-soft: rgba(210, 180, 91, 0.14);
+    --on-accent: #14140e;
+    --positive: #4fbb8b;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 18px 48px rgba(0, 0, 0, 0.55);
+  }
+}
+
+/* --- Reset --------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + 16px);
+  -webkit-text-size-adjust: 100%;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+  }
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* --- Typography ---------------------------------------------------------- */
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.25rem, 6.4vw, 4.1rem);
+}
+h2 {
+  font-size: clamp(1.8rem, 4.2vw, 2.85rem);
+}
+h3 {
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+}
+
+p {
+  text-wrap: pretty;
+}
+
+strong {
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* --- Layout -------------------------------------------------------------- */
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: clamp(1.15rem, 4vw, 2rem);
+}
+
+.section {
+  padding-block: clamp(4rem, 9vw, 7rem);
+  position: relative;
+}
+
+.section--alt {
+  background: var(--bg-alt);
+  border-block: 1px solid var(--border);
+}
+
+.section__head {
+  max-width: 62ch;
+  margin-bottom: clamp(2.25rem, 5vw, 3.5rem);
+}
+
+.section__head--center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: 1rem;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 2px;
+  background: var(--accent);
+  flex: none;
+}
+
+.section__head--center .eyebrow::before {
+  display: none;
+}
+
+.lede {
+  font-size: clamp(1.02rem, 1.7vw, 1.18rem);
+  color: var(--text-2);
+  margin-top: 1.15rem;
+}
+
+/* --- Buttons ------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.9rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.96rem;
+  line-height: 1.2;
+  border: 1px solid transparent;
+  transition: transform 0.16s ease, background-color 0.16s ease,
+    border-color 0.16s ease, box-shadow 0.16s ease;
+  text-align: center;
+}
+
+.btn svg {
+  flex: none;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn--ghost {
+  border-color: var(--border-strong);
+  color: var(--text);
+  background: var(--surface);
+}
+
+.btn--ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.btn--lg {
+  padding: 1.05rem 2rem;
+  font-size: 1.02rem;
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* --- Cards --------------------------------------------------------------- */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: clamp(1.35rem, 2.6vw, 1.9rem);
+  transition: border-color 0.18s ease, transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+}
+
+/* --- Reveal on scroll ---------------------------------------------------- */
+
+/* The hidden state is applied only once the inline head script has confirmed JS
+   is running. If a script is blocked or fails, `.js` is never set and every
+   section renders normally — the animation is the enhancement, not the content. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+  will-change: opacity, transform;
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --- Utilities ----------------------------------------------------------- */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.7rem 1.2rem;
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: 0 0 8px 8px;
+  font-weight: 600;
+  transition: top 0.18s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+}

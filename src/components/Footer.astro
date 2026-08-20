@@ -1,0 +1,217 @@
+---
+import Icon from "./Icon.astro";
+import KenyaFlag from "./KenyaFlag.astro";
+import { site, primaryCta } from "../data/site";
+import { services } from "../data/services";
+
+const year = new Date().getFullYear();
+
+const socials = [
+  { name: "linkedin" as const, href: site.socials.linkedin, label: "LinkedIn" },
+  { name: "github" as const, href: site.socials.github, label: "GitHub" },
+  { name: "x" as const, href: site.socials.x, label: "X" },
+];
+---
+
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <div class="footer__brand">
+      <a class="footer__logo" href="/">emtatudatatech<span>.</span></a>
+      <p>
+        Data, analytics and AI consulting from Nairobi. I build the systems that
+        turn what your business already records into decisions it can act on.
+      </p>
+      <ul class="footer__socials">
+        {
+          socials.map((s) => (
+            <li>
+              <a href={s.href} target="_blank" rel="noopener" aria-label={s.label}>
+                <Icon name={s.name} size={18} />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h3>Services</h3>
+      <ul>
+        {
+          services.map((service) => (
+            <li>
+              <a href={`/#${service.id}`}>{service.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h3>Site</h3>
+      <ul>
+        <li><a href="/#packages">Packages</a></li>
+        <li><a href="/#results">Results</a></li>
+        <li><a href="/#work">Case studies</a></li>
+        <li><a href="/#faq">FAQ</a></li>
+        <li><a href="/cv">Full CV</a></li>
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h3>Contact</h3>
+      <ul>
+        <li>
+          <a href={primaryCta.href} target="_blank" rel="noopener">
+            <Icon name="whatsapp" size={16} />{site.phoneDisplay}
+          </a>
+        </li>
+        <li>
+          <a href={`mailto:${site.email}`}>
+            <Icon name="mail" size={16} />{site.email}
+          </a>
+        </li>
+        <li>
+          <a href={site.phoneHref}>
+            <Icon name="phone" size={16} />Call directly
+          </a>
+        </li>
+      </ul>
+      <p class="footer__loc">{site.location}</p>
+    </div>
+  </div>
+
+  <div class="wrap footer__bar">
+    <p>&copy; {year} {site.legalName}. All rights reserved.</p>
+    <p class="footer__made">
+      Proudly built in Kenya.
+      <KenyaFlag size={17} />
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    padding-top: clamp(3rem, 6vw, 4.5rem);
+    font-size: 0.92rem;
+  }
+
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1.6fr repeat(3, 1fr);
+    gap: clamp(1.75rem, 4vw, 3rem);
+    padding-bottom: 3rem;
+  }
+
+  .footer__logo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: -0.03em;
+  }
+
+  .footer__logo span {
+    color: var(--accent-ink);
+  }
+
+  .footer__brand p {
+    color: var(--text-2);
+    margin-top: 0.9rem;
+    max-width: 38ch;
+  }
+
+  .footer__socials {
+    display: flex;
+    gap: 0.55rem;
+    margin-top: 1.35rem;
+  }
+
+  .footer__socials a {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-2);
+    transition: color 0.16s ease, border-color 0.16s ease;
+  }
+
+  .footer__socials a:hover {
+    color: var(--accent-ink);
+    border-color: var(--accent);
+  }
+
+  .footer__col h3 {
+    font-size: 0.76rem;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 1rem;
+  }
+
+  .footer__col li + li {
+    margin-top: 0.6rem;
+  }
+
+  .footer__col a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-2);
+    transition: color 0.16s ease;
+    overflow-wrap: anywhere;
+  }
+
+  .footer__col a:hover {
+    color: var(--accent-ink);
+  }
+
+  .footer__loc {
+    color: var(--text-3);
+    margin-top: 1rem;
+  }
+
+  .footer__made {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .footer__made :global(svg) {
+    flex: none;
+    border-radius: 2px;
+  }
+
+  .footer__bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    justify-content: space-between;
+    padding-block: 1.4rem;
+    border-top: 1px solid var(--border);
+    color: var(--text-3);
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 880px) {
+    .footer__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .footer__brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

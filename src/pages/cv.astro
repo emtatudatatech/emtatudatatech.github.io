@@ -1,0 +1,471 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { site, primaryCta } from "../data/site";
+
+/**
+ * public/Resume.pdf remains the single source of truth for the CV — nothing on
+ * this page transcribes it, so replacing that one file publishes a new version.
+ */
+const PDF_URL = "/Resume.pdf";
+---
+
+<Base
+  title="CV — Michael Maina Mwangi | emtatudatatech"
+  description="Curriculum Vitae of Michael Maina Mwangi — Senior Data Scientist working in data analytics, machine learning and generative AI, based in Nairobi, Kenya."
+  compactNav
+>
+  <section class="section cv">
+    <div class="wrap">
+      <div class="cv__intro">
+        <p class="eyebrow">Curriculum Vitae</p>
+        <h1>{site.legalName}</h1>
+        <p class="cv__subtitle">{site.role}</p>
+        <p class="cv__updated" id="cv-updated" hidden></p>
+
+        <div class="cv__actions">
+          <a
+            class="btn btn--primary"
+            href={PDF_URL}
+            download="Michael-Maina-Mwangi-CV.pdf"
+          >
+            <Icon name="download" size={17} />
+            Download PDF
+          </a>
+          <a class="btn btn--ghost" href={PDF_URL} target="_blank" rel="noopener">
+            <Icon name="arrowUpRight" size={16} />
+            Open in new tab
+          </a>
+          <a class="btn btn--ghost" href="/">
+            <Icon name="arrowLeft" size={16} />
+            Back to main site
+          </a>
+          <a
+            class="btn btn--ghost"
+            href={primaryCta.href}
+            target="_blank"
+            rel="noopener"
+          >
+            <Icon name="whatsapp" size={16} />
+            Hire me
+          </a>
+        </div>
+      </div>
+
+      <div class="cv__viewer" id="cv-viewer">
+        <p class="cv__status" id="cv-status" role="status">
+          <span class="cv__spinner" aria-hidden="true"></span>
+          Loading CV&hellip;
+        </p>
+      </div>
+
+      <noscript>
+        <div class="cv__fallback">
+          <p>This viewer needs JavaScript to render the CV inline.</p>
+          <a
+            class="btn btn--primary"
+            href={PDF_URL}
+            download="Michael-Maina-Mwangi-CV.pdf"
+          >
+            <Icon name="download" size={17} />
+            Download the PDF instead
+          </a>
+        </div>
+      </noscript>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .cv {
+    padding-block: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .cv__intro {
+    text-align: center;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .cv__intro .eyebrow::before {
+    display: none;
+  }
+
+  .cv__intro h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
+
+  .cv__subtitle {
+    margin-top: 0.6rem;
+    color: var(--text-2);
+  }
+
+  /* inline-flex below would otherwise beat the UA's [hidden] rule, leaving an
+     empty pill on screen until the date resolves — or forever, if it fails. */
+  .cv__updated[hidden] {
+    display: none;
+  }
+
+  .cv__updated {
+    margin-top: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.32rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    font-size: 0.79rem;
+    color: var(--text-3);
+  }
+
+  .cv__actions {
+    margin-top: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+  }
+
+  .cv__viewer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .cv__status {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 4rem 1rem;
+    font-size: 0.95rem;
+    color: var(--text-3);
+  }
+
+  .cv__spinner {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--border-strong);
+    border-top-color: var(--accent);
+    animation: cv-spin 0.85s linear infinite;
+  }
+
+  @keyframes cv-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* One rendered PDF page. Always on white — the source document is. */
+  .cv :global(.cv__pagewrap) {
+    position: relative;
+    max-width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .cv :global(.cv__pagewrap canvas) {
+    display: block;
+    max-width: 100%;
+  }
+
+  .cv :global(.cv__object) {
+    width: 100%;
+    height: 80vh;
+    border-radius: 10px;
+    background: #fff;
+  }
+
+  .cv__fallback,
+  .cv :global(.cv__fallback) {
+    padding: 3rem 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-align: center;
+  }
+
+  .cv__fallback p,
+  .cv :global(.cv__fallback p) {
+    margin-bottom: 1.2rem;
+    color: var(--text-2);
+  }
+
+  /* --- pdf.js text layer ---------------------------------------------------
+     Minimal subset of pdfjs-dist web/pdf_viewer.css, inlined so the page keeps
+     selectable, searchable text without pulling 56KB of viewer CSS that would
+     collide with the site's own styles. */
+
+  .cv :global(.textLayer) {
+    position: absolute;
+    text-align: initial;
+    inset: 0;
+    overflow: hidden;
+    opacity: 0.25;
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+    forced-color-adjust: none;
+    transform-origin: 0 0;
+    z-index: 2;
+  }
+
+  .cv :global(.textLayer :is(span, br)) {
+    color: transparent;
+    position: absolute;
+    white-space: pre;
+    cursor: text;
+    transform-origin: 0% 0%;
+  }
+
+  .cv :global(.textLayer span.markedContent) {
+    top: 0;
+    height: 0;
+  }
+
+  .cv :global(.textLayer ::selection) {
+    background: #b7d3ff;
+  }
+
+  .cv :global(.textLayer br::selection) {
+    background: transparent;
+  }
+
+  /* --- Print ---------------------------------------------------------------
+     Downloading is the better route to a clean PDF, but printing this page
+     directly should still produce one CV page per sheet. */
+
+  @media print {
+    @page {
+      margin: 8mm;
+    }
+
+    .cv__intro,
+    .cv__status {
+      display: none !important;
+    }
+
+    .cv :global(.textLayer) {
+      display: none !important;
+    }
+
+    .cv {
+      padding: 0;
+    }
+
+    .cv__viewer {
+      display: block;
+    }
+
+    .cv :global(.cv__pagewrap) {
+      /* On-screen pixel dimensions would overflow the sheet, so let the canvas
+         size itself and just cap it below. */
+      width: auto !important;
+      height: auto !important;
+      border-radius: 0;
+      box-shadow: none;
+      break-after: page;
+      break-inside: avoid;
+    }
+
+    .cv :global(.cv__pagewrap:last-child) {
+      break-after: auto;
+    }
+
+    .cv :global(.cv__pagewrap canvas) {
+      /* Constrain BOTH axes: capping width alone lets an A4-proportioned page
+         run past the bottom of the sheet and spill onto a second one. */
+      width: auto !important;
+      height: auto !important;
+      max-width: 100% !important;
+      max-height: 96vh !important;
+      margin-inline: auto;
+    }
+  }
+</style>
+
+<style is:global>
+  @media print {
+    .nav,
+    .footer,
+    .skip-link {
+      display: none !important;
+    }
+  }
+</style>
+
+<!-- pdf.js 3.11.174, vendored under public/vendor/pdfjs (Apache-2.0). Self-hosted
+     rather than CDN-loaded so the CV never depends on a third-party host. -->
+<script
+  is:inline
+  src="/vendor/pdfjs/pdf.min.js"
+  onerror="window.__pdfjsFailed = true;"></script>
+
+<script is:inline define:vars={{ PDF_URL }}>
+  (function () {
+    var PDFJS_WORKER = "/vendor/pdfjs/pdf.worker.min.js";
+    var MAX_PAGE_WIDTH = 900;
+
+    var viewer = document.getElementById("cv-viewer");
+    var status = document.getElementById("cv-status");
+    var updated = document.getElementById("cv-updated");
+
+    /* Falls back to the browser's own PDF handling, then to a plain download
+       link, so the CV stays reachable either way. */
+    function showFallback(reason) {
+      console.warn("Inline CV render unavailable:", reason);
+      viewer.innerHTML =
+        '<object class="cv__object" data="' +
+        PDF_URL +
+        '" type="application/pdf">' +
+        '<div class="cv__fallback"><p>Your browser could not display the CV inline.</p>' +
+        '<p><a class="btn btn--primary" href="' +
+        PDF_URL +
+        '" download="Michael-Maina-Mwangi-CV.pdf">Download the PDF</a></p></div>' +
+        "</object>";
+    }
+
+    function showUpdated(httpDate, pdfDate) {
+      var date = httpDate || pdfDate;
+      if (!date || isNaN(date.getTime())) return;
+      updated.textContent =
+        "Latest version — last updated " +
+        date.toLocaleDateString(undefined, {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+      updated.hidden = false;
+    }
+
+    /* PDF date strings look like D:20260818175300+03'00' */
+    function parsePdfDate(raw) {
+      if (!raw) return null;
+      var m = /^D:(\d{4})(\d{2})(\d{2})(\d{2})?(\d{2})?(\d{2})?/.exec(raw);
+      if (!m) return null;
+      return new Date(
+        Number(m[1]),
+        Number(m[2]) - 1,
+        Number(m[3]),
+        Number(m[4] || 0),
+        Number(m[5] || 0),
+        Number(m[6] || 0),
+      );
+    }
+
+    var renderToken = 0;
+
+    async function renderDocument(doc) {
+      var token = ++renderToken;
+      var available = viewer.clientWidth || MAX_PAGE_WIDTH;
+      var targetWidth = Math.min(available, MAX_PAGE_WIDTH);
+      /* Cap the backing store so high-DPR screens don't blow up memory. */
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      var pages = document.createDocumentFragment();
+
+      for (var n = 1; n <= doc.numPages; n++) {
+        var page = await doc.getPage(n);
+        if (token !== renderToken) return; /* a resize superseded us */
+
+        var scale = targetWidth / page.getViewport({ scale: 1 }).width;
+        var viewport = page.getViewport({ scale: scale });
+
+        var wrap = document.createElement("div");
+        wrap.className = "cv__pagewrap";
+        wrap.style.width = viewport.width + "px";
+        wrap.style.height = viewport.height + "px";
+        /* pdf.js 3.x positions text-layer spans against this variable. */
+        wrap.style.setProperty("--scale-factor", scale);
+
+        var canvas = document.createElement("canvas");
+        canvas.width = Math.floor(viewport.width * dpr);
+        canvas.height = Math.floor(viewport.height * dpr);
+        canvas.style.width = viewport.width + "px";
+        canvas.style.height = viewport.height + "px";
+        canvas.setAttribute("role", "img");
+        canvas.setAttribute("aria-label", "CV page " + n + " of " + doc.numPages);
+
+        var textLayer = document.createElement("div");
+        textLayer.className = "textLayer";
+
+        wrap.appendChild(canvas);
+        wrap.appendChild(textLayer);
+        pages.appendChild(wrap);
+
+        await page.render({
+          canvasContext: canvas.getContext("2d"),
+          viewport: viewport,
+          transform: dpr !== 1 ? [dpr, 0, 0, dpr, 0, 0] : null,
+        }).promise;
+        if (token !== renderToken) return;
+
+        /* Selectable, searchable, screen-reader-readable text over the canvas. */
+        var textContent = await page.getTextContent();
+        await pdfjsLib.renderTextLayer({
+          textContentSource: textContent,
+          container: textLayer,
+          viewport: viewport,
+          textDivs: [],
+        }).promise;
+        if (token !== renderToken) return;
+      }
+
+      if (token !== renderToken) return;
+      viewer.innerHTML = "";
+      viewer.appendChild(pages);
+    }
+
+    async function init() {
+      if (window.__pdfjsFailed || typeof pdfjsLib === "undefined") {
+        showFallback("pdf.js failed to load");
+        return;
+      }
+
+      pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER;
+
+      try {
+        /* 'no-cache' revalidates on every visit, so a replaced Resume.pdf shows
+           up immediately instead of sitting behind the CDN's cache window. A
+           304 still reuses the cached bytes, so this stays cheap. */
+        var response = await fetch(PDF_URL, { cache: "no-cache" });
+        if (!response.ok) throw new Error("HTTP " + response.status);
+
+        var header = response.headers.get("Last-Modified");
+        var data = await response.arrayBuffer();
+        var doc = await pdfjsLib.getDocument({ data: data }).promise;
+
+        var pdfDate = null;
+        try {
+          var meta = await doc.getMetadata();
+          pdfDate = parsePdfDate(meta && meta.info && meta.info.CreationDate);
+        } catch (e) {
+          /* Metadata is optional; the date line just gets skipped. */
+        }
+        showUpdated(header ? new Date(header) : null, pdfDate);
+
+        await renderDocument(doc);
+
+        var resizeTimer;
+        var lastWidth = viewer.clientWidth;
+        window.addEventListener("resize", function () {
+          /* Re-render only on width changes, so canvases stay crisp without
+             thrashing on mobile URL-bar height changes. */
+          if (viewer.clientWidth === lastWidth) return;
+          lastWidth = viewer.clientWidth;
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function () {
+            renderDocument(doc).catch(showFallback);
+          }, 250);
+        });
+      } catch (err) {
+        showFallback(err);
+      }
+    }
+
+    if (status) init();
+  })();
+</script>

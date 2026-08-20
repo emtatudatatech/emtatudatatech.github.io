@@ -1,0 +1,183 @@
+---
+import Icon from "./Icon.astro";
+import { services } from "../data/services";
+---
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section__head">
+      <p class="eyebrow">What emtatudatatech does</p>
+      <h2>Six things. Each one ends in a system your team actually uses.</h2>
+      <p class="lede">
+        No packages of "consulting hours". Every engagement produces something
+        that runs after I leave — and documentation your team can pick up.
+      </p>
+    </div>
+
+    <div class="services">
+      {
+        services.map((service, index) => (
+          <article
+            class="services__card reveal"
+            id={service.id}
+            data-reveal-delay={index * 70}
+          >
+            <div class="services__head">
+              <span class="services__icon" aria-hidden="true">
+                <Icon name={service.icon as any} size={22} />
+              </span>
+              <div>
+                <h3>{service.name}</h3>
+                <p class="services__pain">{service.pain}</p>
+              </div>
+            </div>
+
+            <p class="services__outcome">
+              <strong>What changes:</strong> {service.outcome}
+            </p>
+
+            <ul class="services__list">
+              {service.deliverables.map((item) => (
+                <li>
+                  <Icon name="check" size={15} />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <p class="services__proof">
+              <Icon name="shield" size={15} />
+              <span>{service.proof}</span>
+            </p>
+
+            <ul class="services__stack">
+              {service.stack.map((tool) => (
+                <li>{tool}</li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: 1.1rem;
+  }
+
+  .services__card {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.4rem, 2.6vw, 1.9rem);
+    scroll-margin-top: calc(var(--nav-h) + 24px);
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .services__card:hover {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Six services divide evenly into the three-column grid, so every card is the
+     same size and no trailing row is left half empty. */
+
+  .services__head {
+    display: flex;
+    gap: 0.95rem;
+    align-items: flex-start;
+  }
+
+  .services__icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    flex: none;
+    border-radius: 12px;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+  }
+
+  .services__card h3 {
+    font-size: 1.22rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .services__pain {
+    color: var(--text-3);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .services__outcome {
+    margin-top: 1.15rem;
+    padding: 0.9rem 1.05rem;
+    border-left: 3px solid var(--accent);
+    background: var(--surface-2);
+    border-radius: 0 10px 10px 0;
+    font-size: 0.94rem;
+    color: var(--text-2);
+  }
+
+  .services__list {
+    margin-top: 1.25rem;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .services__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.92rem;
+    color: var(--text-2);
+  }
+
+  .services__list :global(svg) {
+    flex: none;
+    margin-top: 0.28em;
+    color: var(--accent-ink);
+  }
+
+  .services__proof {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55rem;
+    margin-top: 1.25rem;
+    font-size: 0.88rem;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .services__proof :global(svg) {
+    flex: none;
+    margin-top: 0.25em;
+    color: var(--positive);
+  }
+
+  .services__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: auto;
+    padding-top: 1.25rem;
+  }
+
+  .services__stack li {
+    font-family: var(--font-mono);
+    font-size: 0.71rem;
+    letter-spacing: 0.02em;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    color: var(--text-3);
+    background: var(--surface-2);
+  }
+</style>

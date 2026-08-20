@@ -1,7 +1,14 @@
-# File types
+# Build output
+dist/
+.astro/
+node_modules/
+
+# Data exports are kept out of the repo. This used to be a blanket `*.json` and
+# `*.txt`, which silently excluded package.json, package-lock.json and
+# public/robots.txt — so the rules are scoped to where data actually lands.
 *.xlsx
-*.json
-*.txt
+/data/
+public/catalogue/*.json
 
 # macOS
 .DS_Store

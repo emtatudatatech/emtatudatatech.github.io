@@ -1,0 +1,164 @@
+---
+const steps = [
+  {
+    n: "01",
+    title: "Diagnostic call",
+    duration: "30 minutes, free",
+    body: "You describe the problem and what it costs you. I tell you whether it is solvable with what you have, roughly how long it takes, and whether I am the right person. Some calls end with a referral instead of a proposal.",
+  },
+  {
+    n: "02",
+    title: "Scope and baseline",
+    duration: "Week 1",
+    body: "We agree the deliverables, the deadline and — critically — the number we are moving. Default rate, fraud loss, hours per week, failure percentage. Written down before any work starts, so nobody argues about success later.",
+  },
+  {
+    n: "03",
+    title: "Build in the open",
+    duration: "Weekly",
+    body: "You see working output every week, not one reveal at the end. Anything that is not going to work becomes obvious in week two, when changing course is cheap.",
+  },
+  {
+    n: "04",
+    title: "Deploy and hand over",
+    duration: "Final week",
+    body: "It runs in your environment, on your infrastructure, with your team trained on it. Code, models and documentation are yours. No licence, no lock-in, no black box.",
+  },
+  {
+    n: "05",
+    title: "Measure against the baseline",
+    duration: "30 days after",
+    body: "We go back to the number we agreed in step two and check it. If it moved, you have a case for the next project. If it did not, you get an honest post-mortem rather than a victory lap.",
+  },
+];
+---
+
+<section class="section" id="process">
+  <div class="wrap">
+    <div class="section__head">
+      <p class="eyebrow">How it works</p>
+      <h2>Five steps. You know the number we are moving before I write a line of code.</h2>
+      <p class="lede">
+        Most data projects fail because success was never defined. This one gets
+        defined in week one and checked in writing at the end.
+      </p>
+    </div>
+
+    <ol class="process">
+      {
+        steps.map((step, index) => (
+          <li class="process__step reveal" data-reveal-delay={index * 70}>
+            <div class="process__marker">
+              <span class="process__n">{step.n}</span>
+            </div>
+            <div class="process__body">
+              <div class="process__title">
+                <h3>{step.title}</h3>
+                <span class="process__duration">{step.duration}</span>
+              </div>
+              <p>{step.body}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .process {
+    display: grid;
+    gap: 0;
+    max-width: 900px;
+  }
+
+  .process__step {
+    display: grid;
+    grid-template-columns: 62px minmax(0, 1fr);
+    gap: 1.35rem;
+    padding-bottom: 2.25rem;
+  }
+
+  .process__step:last-child {
+    padding-bottom: 0;
+  }
+
+  .process__marker {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .process__n {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    flex: none;
+    border-radius: 999px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--accent-ink);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    z-index: 1;
+  }
+
+  /* Connector line between markers, hidden on the final step. */
+  .process__step:not(:last-child) .process__marker::after {
+    content: "";
+    position: absolute;
+    top: 46px;
+    bottom: -2.25rem;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .process__title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 0.9rem;
+    margin-bottom: 0.5rem;
+    padding-top: 0.55rem;
+  }
+
+  .process__title h3 {
+    font-size: 1.18rem;
+  }
+
+  .process__duration {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    background: var(--accent-soft);
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+  }
+
+  .process__body p {
+    color: var(--text-2);
+    font-size: 0.96rem;
+    max-width: 68ch;
+  }
+
+  @media (max-width: 560px) {
+    .process__step {
+      grid-template-columns: 42px minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .process__n {
+      width: 38px;
+      height: 38px;
+      font-size: 0.72rem;
+    }
+
+    .process__step:not(:last-child) .process__marker::after {
+      top: 38px;
+    }
+  }
+</style>

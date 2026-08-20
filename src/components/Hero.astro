@@ -1,0 +1,366 @@
+---
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+import portrait from "../assets/header.jpg";
+import { primaryCta, site } from "../data/site";
+import { headlineStats, clients } from "../data/proof";
+---
+
+<section class="hero">
+  <div class="wrap hero__inner">
+    <div class="hero__content">
+      <p class="hero__eyebrow">
+        <span class="hero__pulse" aria-hidden="true"></span>
+        Data · Analytics · AI &nbsp;—&nbsp; {site.location}
+      </p>
+
+      <h1>
+        I turn the data your business<br class="hero__break" />
+        already has into <em>money you can count</em>.
+      </h1>
+
+      <p class="hero__lede">
+        Not a strategy deck. Not a proof of concept that dies in a folder.
+        Working dashboards, production models, automated pipelines and the
+        web applications around them — built for banks, fintechs and growing
+        businesses who need the number to be right the first time.
+      </p>
+
+      <div class="hero__btns">
+        <a
+          class="btn btn--primary btn--lg"
+          href={primaryCta.href}
+          target="_blank"
+          rel="noopener"
+        >
+          <Icon name="whatsapp" size={19} />
+          Tell me your problem
+        </a>
+        <a class="btn btn--ghost btn--lg" href="#packages">
+          See what you get
+          <Icon name="arrowRight" size={17} />
+        </a>
+      </div>
+
+      <p class="hero__reassure">
+        <Icon name="clock" size={15} />
+        Free 30-minute diagnostic call. If I am not the right person for it,
+        I will say so and point you at who is.
+      </p>
+    </div>
+
+    <div class="hero__portrait">
+      <Image
+        src={portrait}
+        alt="Michael Maina, data scientist and founder of emtatudatatech"
+        width={640}
+        widths={[320, 480, 640]}
+        sizes="(max-width: 900px) 240px, 420px"
+        loading="eager"
+        fetchpriority="high"
+        format="webp"
+        quality={78}
+      />
+      <div class="hero__badge">
+        <strong>Michael Maina</strong>
+        <span>{site.roleShort}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <ul class="hero__stats">
+      {
+        headlineStats.map((stat) => (
+          <li>
+            <strong>{stat.value}</strong>
+            <span class="hero__stat-label">{stat.label}</span>
+            <span class="hero__stat-context">{stat.context}</span>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="hero__clients">
+      <p>Work delivered for</p>
+      <ul>
+        {clients.map((client) => <li>{client}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(3rem, 6vw, 4.5rem);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Soft radial wash behind the headline. Pure CSS — no image request. */
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -30%;
+    right: -10%;
+    width: min(760px, 80vw);
+    aspect-ratio: 1;
+    background: radial-gradient(
+      circle,
+      var(--accent-soft) 0%,
+      transparent 65%
+    );
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    padding: 0.4rem 0.9rem 0.4rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero__pulse {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--positive);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--positive) 60%, transparent);
+    animation: pulse 2.4s ease-out infinite;
+  }
+
+  @keyframes pulse {
+    70% {
+      box-shadow: 0 0 0 8px transparent;
+    }
+    100% {
+      box-shadow: 0 0 0 0 transparent;
+    }
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent-ink);
+    position: relative;
+  }
+
+  /* Keeping the payoff phrase on one line is only safe once there is room for
+     it — below this width it would run off the side of the screen. */
+  @media (min-width: 700px) {
+    .hero h1 em {
+      white-space: nowrap;
+    }
+  }
+
+  .hero__lede {
+    font-size: clamp(1.03rem, 1.7vw, 1.2rem);
+    color: var(--text-2);
+    max-width: 56ch;
+    margin-top: 1.5rem;
+  }
+
+  .hero__btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2rem;
+  }
+
+  .hero__reassure {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55rem;
+    margin-top: 1.35rem;
+    font-size: 0.89rem;
+    color: var(--text-3);
+    max-width: 52ch;
+  }
+
+  .hero__reassure :global(svg) {
+    flex: none;
+    margin-top: 0.22em;
+  }
+
+  /* --- Portrait --- */
+
+  .hero__portrait {
+    position: relative;
+    justify-self: center;
+    width: min(100%, 420px);
+  }
+
+  .hero__portrait :global(img) {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center 22%;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+  }
+
+  .hero__badge {
+    position: absolute;
+    left: 50%;
+    bottom: -18px;
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: 108%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 0.7rem 1.15rem;
+    border-radius: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+  }
+
+  .hero__badge strong {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    line-height: 1.2;
+  }
+
+  .hero__badge span {
+    font-size: 0.73rem;
+    color: var(--text-3);
+    line-height: 1.35;
+  }
+
+  /* --- Stat bar --- */
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    margin-top: clamp(3.25rem, 6vw, 4.5rem);
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .hero__stats li {
+    background: var(--surface);
+    padding: 1.4rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .hero__stats strong {
+    font-family: var(--font-display);
+    font-size: clamp(1.55rem, 3vw, 2.1rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--accent-ink);
+  }
+
+  .hero__stat-label {
+    font-weight: 600;
+    font-size: 0.92rem;
+  }
+
+  .hero__stat-context {
+    font-size: 0.8rem;
+    color: var(--text-3);
+    line-height: 1.45;
+    margin-top: 0.25rem;
+  }
+
+  /* --- Client strip --- */
+
+  .hero__clients {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.6rem;
+    margin-top: 2rem;
+  }
+
+  .hero__clients p {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+
+  .hero__clients ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 1.4rem;
+  }
+
+  .hero__clients li {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-2);
+  }
+
+  /* --- Responsive --- */
+
+  @media (max-width: 900px) {
+    .hero__inner {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .hero__break {
+      display: none;
+    }
+
+    /* Portrait leads on mobile, above the headline. The block spans the full
+       column while the photo itself stays small, so the badge below it has room
+       to sit on one line instead of orphaning the last word. */
+    .hero__portrait {
+      order: -1;
+      width: 100%;
+      justify-self: start;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero__portrait :global(img) {
+      max-width: 240px;
+    }
+
+    .hero__badge {
+      position: static;
+      transform: none;
+      /* Unconstrained `max-content` would size to the full role string and run
+         off the right edge — body's overflow-x:hidden hides the scrollbar but
+         not the clipped text. */
+      max-width: 100%;
+      margin-top: 0.85rem;
+      text-align: left;
+      box-shadow: none;
+    }
+
+    .hero__stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 460px) {
+    .hero__stats {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>
